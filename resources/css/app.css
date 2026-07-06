@@ -528,6 +528,7 @@ textarea { padding: 14px 12px; resize: vertical; min-height: 80px; }
     background: var(--crema);
     color: var(--texto);
     transition: var(--transition);
+    overflow: hidden;
 }
 
 .venta-card:hover .venta-icono { background: var(--verde); border-color: var(--texto); }

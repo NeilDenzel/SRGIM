@@ -39,6 +39,11 @@
                     <polyline points="21 15 16 10 5 21"></polyline>
                 </svg>
             </div>
+            @if($producto->foto_ruta)
+            <div style="text-align:center;margin-bottom:12px;">
+                <img src="{{ Storage::url($producto->foto_ruta) }}" alt="{{ $producto->nombre }}" style="width:80px;height:80px;object-fit:cover;border:3px solid var(--borde);border-radius:var(--border-radius-sm);">
+            </div>
+            @endif
             <input type="file" name="foto" accept="image/*">
             <span style="font-size:0.8rem;color:var(--texto-gris);">Dejar vacío para mantener la foto actual</span>
             @error('foto')<span style="color:#8b3a3a;font-size:13px;">{{ $message }}</span>@enderror
