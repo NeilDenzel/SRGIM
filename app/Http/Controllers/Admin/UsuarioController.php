@@ -32,11 +32,10 @@ class UsuarioController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'admin',
         ]);
 
         return redirect()->route('admin.usuarios.index')
-            ->with('success', 'Usuario creado correctamente.');
+            ->with('success', 'Usuario colaborador creado correctamente.');
     }
 
     public function edit(User $usuario)

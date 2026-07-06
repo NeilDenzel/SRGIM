@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Aurea Huamán',
             'email' => 'aurea@tiendamilagritos.com',
             'password' => Hash::make('aurea123'),
-            'role' => 'admin',
+            'role' => 'colaborador',
         ]);
 
         $categorias = [

@@ -22,14 +22,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
-    Route::get('/admin/usuarios/create', [UsuarioController::class, 'create'])->name('admin.usuarios.create');
-    Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('admin.usuarios.store');
-    Route::get('/admin/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('admin.usuarios.edit');
-    Route::put('/admin/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('admin.usuarios.update');
-    Route::delete('/admin/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
-
     Route::get('/catalogos', [ProductoController::class, 'index'])->name('catalogos.index');
     Route::get('/catalogos/create', [ProductoController::class, 'create'])->name('catalogos.create');
     Route::post('/catalogos', [ProductoController::class, 'store'])->name('catalogos.store');
@@ -49,4 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/alertas', [AlertaController::class, 'index'])->name('alertas.index');
     Route::get('/caja', [CajaController::class, 'index'])->name('caja.index');
     Route::get('/historial', [HistorialController::class, 'index'])->name('historial.index');
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
+    Route::get('/admin/usuarios/create', [UsuarioController::class, 'create'])->name('admin.usuarios.create');
+    Route::post('/admin/usuarios', [UsuarioController::class, 'store'])->name('admin.usuarios.store');
+    Route::get('/admin/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('admin.usuarios.edit');
+    Route::put('/admin/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('admin.usuarios.update');
+    Route::delete('/admin/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
 });
