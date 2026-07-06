@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRGIM - Inventario - Caja</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #d3e6c4;
+    padding: 14px 16px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+
+  .title-bar {
+    background-color: #fdf1cf;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  main {
+    flex: 1;
+    padding: 16px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .tabs span:first-child {
+    font-weight: bold;
+    color: #1a1a1a;
+  }
+
+  .tabs span:last-child {
+    color: #999;
+  }
+
+  .chart-box {
+    border: 2px solid #9aa8bf;
+    border-radius: 3px;
+    padding: 16px 8px 6px 8px;
+  }
+
+  .chart-box svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .dot {
+    fill: #1a1a1a;
+  }
+
+  .date-label {
+    font-size: 10px;
+    fill: #333;
+    text-anchor: middle;
+  }
+
+  .tick {
+    fill: #888;
+  }
+
+  nav {
+    display: flex;
+    background-color: #fdf1cf;
+    border-top: 1px solid #eadfb0;
+  }
+
+  nav a {
+    flex: 1;
+    text-align: center;
+    padding: 14px 4px;
+    text-decoration: none;
+    color: #b3a262;
+    font-size: 13px;
+  }
+
+  nav a.active {
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    header { font-size: 14px; padding: 12px; }
+    .title-bar { font-size: 14px; padding: 10px; }
+    nav a { font-size: 10px; padding: 12px 1px; }
+    main { padding: 10px; }
+    .date-label { font-size: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>SRGIM - INVENTARIO</header>
+
+<div class="title-bar">Cierre Diario</div>
+
+<main>
+  <div class="tabs">
+    <span>Últimos 15 dias</span>
+    <span>Últimos 30 dias</span>
+  </div>
+
+  <div class="chart-box">
+    <svg viewBox="0 0 1080 260" preserveAspectRatio="xMidYMid meet">
+      <!-- puntos de la gráfica (valores aproximados según la imagen original) -->
+      <!-- eje de puntos ubicados a lo largo de 15 días -->
+      <g>
+        <circle class="dot" cx="40"  cy="90"  r="6"></circle>
+        <circle class="dot" cx="112" cy="115" r="6"></circle>
+        <circle class="dot" cx="184" cy="100" r="6"></circle>
+        <circle class="dot" cx="256" cy="70"  r="6"></circle>
+        <circle class="dot" cx="328" cy="88"  r="6"></circle>
+        <circle class="dot" cx="400" cy="80"  r="6"></circle>
+        <circle class="dot" cx="472" cy="108" r="6"></circle>
+        <circle class="dot" cx="544" cy="102" r="6"></circle>
+        <circle class="dot" cx="616" cy="118" r="6"></circle>
+        <circle class="dot" cx="688" cy="128" r="6"></circle>
+        <circle class="dot" cx="760" cy="97"  r="6"></circle>
+        <circle class="dot" cx="832" cy="72"  r="6"></circle>
+        <circle class="dot" cx="904" cy="83"  r="6"></circle>
+        <circle class="dot" cx="976" cy="93"  r="6"></circle>
+        <circle class="dot" cx="1048" cy="99" r="6"></circle>
+      </g>
+
+      <!-- marcas pequeñas debajo de cada punto -->
+      <g class="tick">
+        <circle cx="40"  cy="200" r="1.4"></circle>
+        <circle cx="112" cy="200" r="1.4"></circle>
+        <circle cx="184" cy="200" r="1.4"></circle>
+        <circle cx="256" cy="200" r="1.4"></circle>
+        <circle cx="328" cy="200" r="1.4"></circle>
+        <circle cx="400" cy="200" r="1.4"></circle>
+        <circle cx="472" cy="200" r="1.4"></circle>
+        <circle cx="544" cy="200" r="1.4"></circle>
+        <circle cx="616" cy="200" r="1.4"></circle>
+        <circle cx="688" cy="200" r="1.4"></circle>
+        <circle cx="760" cy="200" r="1.4"></circle>
+        <circle cx="832" cy="200" r="1.4"></circle>
+        <circle cx="904" cy="200" r="1.4"></circle>
+        <circle cx="976" cy="200" r="1.4"></circle>
+        <circle cx="1048" cy="200" r="1.4"></circle>
+      </g>
+
+      <!-- etiquetas de fecha -->
+      <g>
+        <text class="date-label" x="40"  y="220">24 may</text>
+        <text class="date-label" x="112" y="220">25 may</text>
+        <text class="date-label" x="184" y="220">26 may</text>
+        <text class="date-label" x="256" y="220">27 may</text>
+        <text class="date-label" x="328" y="220">28 may</text>
+        <text class="date-label" x="400" y="220">29 may</text>
+        <text class="date-label" x="472" y="220">30 may</text>
+        <text class="date-label" x="544" y="220">31 may</text>
+        <text class="date-label" x="616" y="220">1 jun</text>
+        <text class="date-label" x="688" y="220">2 jun</text>
+        <text class="date-label" x="760" y="220">3 jun</text>
+        <text class="date-label" x="832" y="220">4 jun</text>
+        <text class="date-label" x="904" y="220">5 jun</text>
+        <text class="date-label" x="976" y="220">6 jun</text>
+        <text class="date-label" x="1048" y="220">7 jun</text>
+      </g>
+    </svg>
+  </div>
+</main>
+
+<nav>
+  <a href="#">Catalogo</a>
+  <a href="#">Ventas</a>
+  <a href="#">Alertas</a>
+  <a href="#" class="active">Caja</a>
+  <a href="#">Historial</a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRGIM - Inventario</title>
+
+<style>
+
+:root{
+    --gris:#A9B0C1;
+    --azul:#C4D1E7;
+    --verde:#D9ECC8;
+    --crema:#FFF8E7;
+    --texto:#2f2f2f;
+    --borde:#b8c0d4;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#ffffff;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Encabezado */
+
+header{
+    width:100%;
+    background:var(--verde);
+    padding:15px 30px;
+    box-shadow:0 2px 8px rgba(0,0,0,.10);
+}
+
+header h1{
+    color:var(--texto);
+    font-size:20px;
+    font-weight:600;
+}
+
+/* Contenedor */
+
+main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* Login */
+
+.login{
+    width:100%;
+    max-width:420px;
+    background:var(--crema);
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 15px 35px rgba(0,0,0,.10);
+}
+
+.login h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:var(--texto);
+    font-size:38px;
+    font-weight:300;
+}
+
+.campo{
+    margin-bottom:20px;
+}
+
+.campo input{
+    width:100%;
+    padding:15px;
+    border:3px solid var(--borde);
+    border-radius:6px;
+    font-size:16px;
+    background:#fff;
+    outline:none;
+    transition:.3s;
+}
+
+.campo input:focus{
+    border-color:var(--azul);
+    box-shadow:0 0 8px rgba(196,209,231,.8);
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:6px;
+    background:var(--gris);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:var(--azul);
+    color:#333;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .login{
+        padding:30px;
+        max-width:380px;
+    }
+
+    .login h2{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    header{
+        text-align:center;
+        padding:15px;
+    }
+
+    header h1{
+        font-size:18px;
+    }
+
+    .login{
+        padding:25px;
+        border-radius:15px;
+    }
+
+    .login h2{
+        font-size:28px;
+        margin-bottom:25px;
+    }
+
+    .campo input{
+        padding:13px;
+        font-size:15px;
+    }
+
+    button{
+        padding:13px;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>SRGIM - INVENTARIO</h1>
+</header>
+
+<main>
+
+    <section class="login">
+
+        <h2>Iniciar sesión</h2>
+
+        <form>
+
+            <div class="campo">
+                <input type="text" placeholder="Usuario">
+            </div>
+
+            <div class="campo">
+                <input type="password" placeholder="Contraseña">
+            </div>
+
+            <button type="submit">
+                Ingresar
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRGIM - Agregar Nuevo Usuario</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Formulario para agregar un nuevo usuario administrador al sistema de inventario SRGIM.">
+  <meta name="author" content="SRGIM Team">
+  
+  <!-- Google Fonts for Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       PALETA SRGIM (BODEGA):
+       Verde:  #d4e8d0 (Header)
+       Crema:  #fdf6dd (Fondo de Tarjeta)
+       Gris:   #9aa3b5 (Bordes de inputs)
+       ======================================================== */
+    :root {
+      --verde: #d4e8d0;
+      --verde-dark: #c0dbbb;
+      --crema: #fdf6dd;
+      --borde: #9aa3b5;
+      --texto: #1a1a1a;
+      --texto-gris: #8890a0;
+      --blanco: #ffffff;
+      --espacio: 16px;
+      --border-radius-lg: 16px;
+      --border-radius-sm: 4px;
+      --shadow-sm: 0 4px 6px rgba(154, 163, 181, 0.1);
+      --shadow-md: 0 10px 20px rgba(154, 163, 181, 0.2);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--blanco);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- HEADER ---------- */
+    .app-header {
+      background-color: var(--verde);
+      border-bottom: 3px solid var(--borde);
+      padding: 14px var(--espacio);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--texto);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-logo svg {
+      stroke: var(--texto);
+    }
+
+    .header-role {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 4px 10px;
+      border: 2px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+    }
+
+    /* ---------- ZONA CENTRAL ---------- */
+    .zona-central {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px var(--espacio);
+    }
+
+    /* ---------- TARJETA FORMULARIO (crema) ---------- */
+    .form-card {
+      background-color: var(--crema);
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-lg);
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    /* Sombra dura retro para coincidir con la estética del boceto */
+    .form-card::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 100%;
+      height: 100%;
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-lg);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .form-card h1 {
+      font-family: 'Outfit', sans-serif;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: var(--texto);
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--texto-gris);
+      display: flex;
+      align-items: center;
+    }
+
+    .form-card input {
+      width: 100%;
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+      background: var(--blanco);
+      padding: 14px 12px 14px 40px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--texto);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-card input::placeholder {
+      color: var(--texto-gris);
+      font-weight: 500;
+    }
+
+    .form-card input:focus {
+      border-color: var(--texto);
+      box-shadow: 0 0 0 3px rgba(154, 163, 181, 0.15);
+    }
+
+    /* Contenedor de Botones */
+    .form-acciones {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    /* Botón guardar (opcional, coherente con la paleta) */
+    .btn-guardar {
+      width: 100%;
+      background-color: var(--verde);
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--texto);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 3px 3px 0px var(--borde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-guardar:hover { 
+      background-color: var(--verde-dark); 
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--borde);
+    }
+
+    .btn-guardar:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--borde);
+    }
+
+    .btn-cancelar {
+      width: 100%;
+      text-align: center;
+      display: block;
+      padding: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--texto-gris);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-cancelar:hover {
+      color: var(--texto);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+
+    /* Celular */
+    @media (max-width: 480px) {
+      .zona-central { padding: 24px 12px; }
+      .form-card { padding: 28px 20px; border-radius: 12px; }
+      .form-card h1 { font-size: 1.3rem; }
+    }
+
+    /* Laptop */
+    @media (min-width: 1024px) {
+      .form-card { max-width: 480px; padding: 48px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span>SRGIM - INVENTARIO</span>
+    </div>
+    <span class="header-role">Administrador</span>
+  </header>
+
+  <!-- FORMULARIO CENTRADO -->
+  <main class="zona-central">
+
+    <form class="form-card" action="lista-usuarios.html" method="get">
+      <h1>Agregar Nuevo Usuario</h1>
+
+      <!-- Campo Usuario -->
+      <div class="input-wrapper">
+        <div class="input-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <input type="text" name="usuario" placeholder="Usuario" required autocomplete="username">
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="input-wrapper">
+        <div class="input-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <input type="password" name="contrasena" placeholder="Contraseña" required autocomplete="new-password">
+      </div>
+
+      <!-- Campo Repetir Contraseña -->
+      <div class="input-wrapper">
+        <div class="input-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <input type="password" name="repetir" placeholder="Repetir Contraseña" required autocomplete="new-password">
+      </div>
+
+      <!-- Campo Correo -->
+      <div class="input-wrapper">
+        <div class="input-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <input type="email" name="correo" placeholder="Correo Electrónico" required autocomplete="email">
+      </div>
+
+      <!-- Acciones -->
+      <div class="form-acciones">
+        <button type="submit" class="btn-guardar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span>Guardar</span>
+        </button>
+        <a href="lista-usuarios.html" class="btn-cancelar">Cancelar</a>
+      </div>
+    </form>
+
+  </main>
+
+</body>
+</html>

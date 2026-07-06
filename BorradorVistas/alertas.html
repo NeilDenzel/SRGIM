@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRGIM - Inventario - Alertas</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #d3e6c4;
+    padding: 14px 16px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+
+  main {
+    flex: 1;
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    color: #333;
+    margin: 10px 0 10px 2px;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #9aa8bf;
+    background: #ffffff;
+    border-radius: 3px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+  }
+
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .icon-box {
+    width: 26px;
+    height: 26px;
+    border: 2px solid #9aa8bf;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-box svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #4a4a4a;
+    stroke-width: 1.5;
+  }
+
+  .product-name {
+    font-size: 15px;
+    color: #1a1a1a;
+  }
+
+  .badge {
+    background-color: #fbe9b4;
+    color: #6b5a1e;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  nav {
+    display: flex;
+    background-color: #fdf1cf;
+    border-top: 1px solid #eadfb0;
+  }
+
+  nav a {
+    flex: 1;
+    text-align: center;
+    padding: 14px 4px;
+    text-decoration: none;
+    color: #b3a262;
+    font-size: 13px;
+  }
+
+  nav a.active {
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    header { font-size: 14px; padding: 12px; }
+    .product-name { font-size: 13px; }
+    .badge { font-size: 10px; padding: 3px 7px; }
+    nav a { font-size: 11px; padding: 12px 2px; }
+    main { padding: 10px; }
+    .icon-box { width: 22px; height: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>SRGIM - INVENTARIO</header>
+
+<main>
+  <div class="section-title">Caducados (1)</div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+      </div>
+      <span class="product-name">Producto</span>
+    </div>
+    <span class="badge">Caducado</span>
+  </div>
+
+  <div class="section-title">Por vencer (4)</div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+      </div>
+      <span class="product-name">Producto</span>
+    </div>
+    <span class="badge">1d</span>
+  </div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+      </div>
+      <span class="product-name">Producto</span>
+    </div>
+    <span class="badge">2d</span>
+  </div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+      </div>
+      <span class="product-name">Producto</span>
+    </div>
+    <span class="badge">4d</span>
+  </div>
+
+  <div class="card">
+    <div class="card-left">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+      </div>
+      <span class="product-name">Producto</span>
+    </div>
+    <span class="badge">7d</span>
+  </div>
+</main>
+
+<nav>
+  <a href="#">Catalogo</a>
+  <a href="#">Ventas</a>
+  <a href="#" class="active">Alertas</a>
+  <a href="#">Caja</a>
+  <a href="#">Historial</a>
+</nav>
+
+</body>
+</html>

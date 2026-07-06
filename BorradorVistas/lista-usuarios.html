@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRGIM - Lista de Usuarios</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Lista de Usuarios registrados en el sistema de inventario SRGIM. Vista de administrador.">
+  <meta name="author" content="SRGIM Team">
+  
+  <!-- Google Fonts for Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       PALETA SRGIM (BODEGA):
+       Verde:  #d4e8d0 (Header)
+       Crema:  #fdf6dd (Botones Atras/Editar)
+       Rosa:   #f8cdd2 (Botón Eliminar)
+       Gris:   #9aa3b5 (Bordes de tarjetas)
+       ======================================================== */
+    :root {
+      --verde: #d4e8d0;
+      --verde-dark: #c0dbbb;
+      --crema: #fdf6dd;
+      --crema-dark: #f8ebb4;
+      --rosa: #f8cdd2;
+      --rosa-dark: #f5b0b7;
+      --borde: #9aa3b5;
+      --texto: #1a1a1a;
+      --texto-muted: #5e6675;
+      --blanco: #ffffff;
+      --espacio: 16px;
+      --border-radius-sm: 4px;
+      --shadow-sm: 0 2px 4px rgba(154, 163, 181, 0.15);
+      --shadow-md: 0 4px 10px rgba(154, 163, 181, 0.25);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--blanco);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- HEADER ---------- */
+    .app-header {
+      background-color: var(--verde);
+      border-bottom: 3px solid var(--borde);
+      padding: 14px var(--espacio);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--texto);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-logo svg {
+      stroke: var(--texto);
+    }
+
+    .header-role {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 4px 10px;
+      border: 2px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+    }
+
+    /* ---------- CONTENIDO ---------- */
+    .contenido {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px var(--espacio);
+      flex: 1;
+    }
+
+    /* Barra superior: titulo + boton atras */
+    .barra-titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      gap: 16px;
+    }
+
+    .barra-titulo h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .barra-titulo h1::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      height: 70%;
+      width: 4px;
+      background-color: var(--borde);
+    }
+
+    .btn-atras {
+      background-color: var(--crema);
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+      padding: 10px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--texto);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 2px 2px 0px var(--borde);
+      text-decoration: none;
+    }
+    
+    .btn-atras:hover { 
+      background-color: var(--crema-dark);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--borde);
+    }
+
+    .btn-atras:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--borde);
+    }
+
+    /* ---------- TARJETA DE USUARIO ---------- */
+    .usuario-card {
+      border: 3px solid var(--borde);
+      background: var(--blanco);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-radius: var(--border-radius-sm);
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      gap: 16px;
+    }
+
+    .usuario-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--texto);
+    }
+
+    .usuario-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .usuario-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--verde);
+      border: 2px solid var(--borde);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--texto);
+    }
+
+    .usuario-nombre {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--texto);
+    }
+
+    .usuario-acciones {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-editar,
+    .btn-eliminar {
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+      padding: 8px 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--texto);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-editar { 
+      background-color: var(--crema); 
+      box-shadow: 2px 2px 0px var(--borde);
+    }
+    
+    .btn-editar:hover { 
+      background-color: var(--crema-dark); 
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--borde);
+    }
+
+    .btn-eliminar { 
+      background-color: var(--rosa); 
+      box-shadow: 2px 2px 0px var(--borde);
+    }
+    
+    .btn-eliminar:hover { 
+      background-color: var(--rosa-dark); 
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--borde);
+    }
+
+    .btn-editar:active,
+    .btn-eliminar:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--borde);
+    }
+
+    /* ---------- ACCION AGREGAR ---------- */
+    .contenedor-agregar {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .btn-agregar {
+      background-color: var(--verde);
+      border: 3px solid var(--borde);
+      border-radius: var(--border-radius-sm);
+      padding: 12px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--texto);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 3px 3px 0px var(--borde);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-agregar:hover {
+      background-color: var(--verde-dark);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--borde);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+
+    /* Celular */
+    @media (max-width: 600px) {
+      .barra-titulo {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .btn-atras { 
+        width: 100%; 
+        justify-content: center;
+      }
+
+      .usuario-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+      }
+
+      .usuario-info {
+        margin-bottom: 8px;
+      }
+
+      .usuario-acciones {
+        justify-content: stretch;
+        width: 100%;
+        gap: 8px;
+      }
+      
+      .btn-editar, .btn-eliminar {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+      }
+    }
+
+    /* Laptop / Desktop */
+    @media (min-width: 1024px) {
+      .contenido { 
+        padding: 40px var(--espacio); 
+      }
+      .usuario-card { 
+        padding: 16px 32px; 
+      }
+      .btn-editar, .btn-eliminar { 
+        padding: 8px 32px; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span>SRGIM - INVENTARIO</span>
+    </div>
+    <span class="header-role">Administrador</span>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="contenido">
+
+    <div class="barra-titulo">
+      <h1>Lista de Usuarios</h1>
+      <a href="ventas.html" class="btn-atras">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Atras</span>
+      </a>
+    </div>
+
+    <!-- Lista de Usuarios -->
+    <div class="usuarios-list">
+      <!-- Usuario A -->
+      <div class="usuario-card">
+        <div class="usuario-info">
+          <div class="usuario-avatar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span class="usuario-nombre">Usuario A</span>
+        </div>
+        <div class="usuario-acciones">
+          <button class="btn-editar">Editar</button>
+          <button class="btn-eliminar">Eliminar</button>
+        </div>
+      </div>
+
+      <!-- Usuario B -->
+      <div class="usuario-card">
+        <div class="usuario-info">
+          <div class="usuario-avatar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span class="usuario-nombre">Usuario B</span>
+        </div>
+        <div class="usuario-acciones">
+          <button class="btn-editar">Editar</button>
+          <button class="btn-eliminar">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agregar Usuario Acceso Directo (Valor Agregado de Diseño) -->
+    <div class="contenedor-agregar">
+      <a href="agregar-usuario.html" class="btn-agregar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>Agregar Nuevo Usuario</span>
+      </a>
+    </div>
+
+  </main>
+
+</body>
+</html>
