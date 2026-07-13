@@ -70,7 +70,7 @@ php artisan key:generate
 # 5. Ejecutar migraciones y seeders
 php artisan migrate:fresh --seed
 
-# 6. Crear enlace de almacenamiento (para fotos de productos)
+# 6. Crear enlace de almacenamiento  (para fotos de productos)
 php artisan storage:link
 
 # 7. Instalar dependencias frontend y compilar

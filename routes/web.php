@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
     Route::get('/ventas/create', [VentaController::class, 'create'])->name('ventas.create');
     Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
+    Route::delete('/ventas/{venta}', [VentaController::class, 'destroy'])->name('ventas.destroy');
 
     Route::get('/alertas', [AlertaController::class, 'index'])->name('alertas.index');
     Route::get('/caja', [CajaController::class, 'index'])->name('caja.index');

@@ -541,6 +541,19 @@ textarea { padding: 14px 12px; resize: vertical; min-height: 80px; }
     color: var(--texto);
 }
 
+.venta-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 120px;
+}
+
+.venta-hora {
+    font-size: 0.75rem;
+    color: var(--texto-gris);
+    font-weight: 600;
+}
+
 .venta-precios {
     display: flex;
     gap: 28px;
@@ -573,8 +586,25 @@ textarea { padding: 14px 12px; resize: vertical; min-height: 80px; }
     margin-bottom: 10px;
 }
 
-.tabs span:first-child { font-weight: bold; color: var(--texto); }
-.tabs span:last-child { color: #999; }
+.tabs a {
+    text-decoration: none;
+    color: #999;
+    font-weight: 600;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.tabs a.activo {
+    font-weight: bold;
+    color: var(--texto);
+    border-bottom-color: var(--texto);
+}
+
+.tabs a:hover:not(.activo) {
+    color: var(--texto-gris);
+}
 
 .chart-box {
     border: 2px solid var(--borde);
@@ -585,7 +615,55 @@ textarea { padding: 14px 12px; resize: vertical; min-height: 80px; }
 .chart-box svg { width: 100%; height: auto; display: block; }
 .dot { fill: var(--texto); }
 .date-label { font-size: 10px; fill: #333; text-anchor: middle; }
+.amount-label { font-size: 9px; fill: var(--texto); text-anchor: middle; font-weight: 700; }
 .tick { fill: #888; }
+
+.reporte-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.reporte-item {
+    flex: 1;
+    min-width: 120px;
+    border: 3px solid var(--borde);
+    border-radius: var(--border-radius-sm);
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.reporte-ingreso { background: var(--azul); }
+.reporte-costo { background: var(--crema); }
+.reporte-ganancia { background: var(--verde); }
+
+.reporte-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--texto-gris);
+    margin-bottom: 4px;
+}
+
+.reporte-valor {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--texto);
+}
+
+.top-posicion {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--texto-gris);
+    min-width: 32px;
+    text-align: center;
+}
 
 /* ========== ADMIN OPCIONES ========== */
 .opcion {
@@ -777,6 +855,9 @@ tr:hover td { background: #f8f8f8; }
     .btn { padding: 13px; }
     .form-card { padding: 28px 20px; border-radius: 12px; }
     .form-card h1 { font-size: 1.3rem; }
+    .reporte-grid { flex-direction: column; }
+    .reporte-item { min-width: unset; }
+    .reporte-valor { font-size: 1.2rem; }
 }
 
 @media (max-width: 480px) {
@@ -788,6 +869,7 @@ tr:hover td { background: #f8f8f8; }
     .icon-box { width: 22px; height: 22px; }
     .title-bar { font-size: 14px; padding: 10px; }
     .date-label { font-size: 8px; }
+    .amount-label { font-size: 7px; }
     .header-logo { font-size: 1rem; }
 }
 

@@ -28,17 +28,46 @@
             <line x1="12" y1="22.08" x2="12" y2="12"></line>
         </svg>
     </div>
-    <span class="venta-nombre">{{ $venta->detalles->first()->producto->nombre ?? 'Venta #'.$venta->id }}</span>
+    <div class="venta-info">
+        <span class="venta-nombre">{{ $venta->detalles->first()->producto->nombre ?? 'Venta #'.$venta->id }}</span>
+        <span class="venta-hora">{{ $venta->created_at->format('H:i') }}</span>
+    </div>
     <div class="venta-precios">
         <span>Cant: {{ number_format($venta->detalles->first()->cantidad ?? 0, 3) }} {{ $venta->detalles->first()->producto->unidad_medida ?? 'UN' }}</span>
         <span>P. Unitario: S/. {{ number_format($venta->detalles->first()->precio_venta_unitario ?? 0, 2) }}</span>
         <span>P. Total: S/. {{ number_format($venta->total_venta, 2) }}</span>
     </div>
-    <a href="#" class="btn btn-editar" style="padding:6px 16px;font-size:0.8rem;">ver mas...</a>
+    <form action="{{ route('ventas.destroy', $venta) }}" method="POST" onsubmit="return confirm('¿Anular esta venta? Se restaurará el stock.')" style="flex-shrink:0;">
+        @csrf @method('DELETE')
+        <button type="submit" class="btn btn-eliminar" style="padding:6px 12px;font-size:0.75rem;">Anular</button>
+    </form>
 </article>
 @empty
 <div class="tarjeta"><span>No hay ventas registradas hoy</span></div>
 @endforelse
+
+@if($ventasAnuladasHoy->isNotEmpty())
+<h2 class="subtitulo" style="margin-top:24px;">Ventas anuladas hoy</h2>
+@foreach($ventasAnuladasHoy as $venta)
+<article class="venta-card" style="opacity:0.6;">
+    <div class="venta-icono" style="background:var(--rosa);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </div>
+    <div class="venta-info">
+        <span class="venta-nombre" style="text-decoration:line-through;">{{ $venta->detalles->first()->producto->nombre ?? 'Venta #'.$venta->id }}</span>
+        <span class="venta-hora">{{ $venta->created_at->format('H:i') }}</span>
+    </div>
+    <div class="venta-precios">
+        <span>Cant: {{ number_format($venta->detalles->first()->cantidad ?? 0, 3) }}</span>
+        <span>Total: S/. {{ number_format($venta->total_venta, 2) }}</span>
+    </div>
+    <span class="badge badge-caducado">Anulada</span>
+</article>
+@endforeach
+@endif
 
 <div style="margin-top:24px;">
     <a href="{{ route('ventas.create') }}" class="btn btn-agregar btn-full">
